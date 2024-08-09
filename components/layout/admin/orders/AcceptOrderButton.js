@@ -67,13 +67,7 @@ const AcceptOrderButton = ({ order, setOrders }) => {
       shipping_charges: 0,
       giftwrap_charges: 0,
       transaction_charges: 0,
-      total_discount: data.cartItems.reduce(
-        (total, item) =>
-          total +
-          ((item.productId.price * item.productId.discount) / 100) *
-            item.quantity,
-        0
-      ),
+      total_discount: 0,
       sub_total: data.totalAmount,
       length: 10,
       breadth: 15,
@@ -92,13 +86,11 @@ const AcceptOrderButton = ({ order, setOrders }) => {
     };
 
     const createShiprocketOrder = await fetch(
-      "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
+      "/api/admin/shiprocket/create-order",
       requestOptions
     );
 
     const res = await createShiprocketOrder.json();
-
-    console.log(res);
 
     const updateOrder = await fetch(`/api/private/order/${order._id}`, {
       method: "PUT",
