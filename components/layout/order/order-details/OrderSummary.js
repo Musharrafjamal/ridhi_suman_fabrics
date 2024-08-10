@@ -3,7 +3,6 @@ import { IoBagOutline } from "react-icons/io5";
 import CartItemsList from "../order-details/CartItemsList";
 
 const OrderSummary = ({ data }) => {
-  const cartItems = data.cartItems;
   return (
     <div className="rounded-lg flex flex-col justify-between border-2 border-gray-500 w-full lg:w-1/2 p-5 ">
       <div className="flex flex-col gap-5">
@@ -12,12 +11,12 @@ const OrderSummary = ({ data }) => {
             <IoBagOutline size={22} />
             ORDER SUMMARY
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-xs md:text-base">
             The sum of total payments for goods there
           </p>
         </div>
-        <div className="overflow-auto max-h-96 px-3">
-          {cartItems.map((product, index) => (
+        <div className="overflow-auto max-h-96 px-0">
+          {data.cartItems.length > 0 && data.cartItems.map((product, index) => (
             <CartItemsList key={index} product={product} data={data} />
           ))}
         </div>

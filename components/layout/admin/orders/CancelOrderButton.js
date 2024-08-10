@@ -29,13 +29,11 @@ const CancelOrderButton = ({ order, setOrders }) => {
     };
 
     const cancelShiprocketOrder = await fetch(
-      "https://apiv2.shiprocket.in/v1/external/orders/cancel",
+      "/api/admin/shiprocket/cancel-order",
       requestOptions
     );
 
     const res = await cancelShiprocketOrder.json();
-
-    console.log(res);
 
     const updateOrder = await fetch(`/api/private/order/${order._id}`, {
       method: "PUT",

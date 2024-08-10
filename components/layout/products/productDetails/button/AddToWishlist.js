@@ -14,7 +14,7 @@ const AddToWishlist = () => {
 
   const wishlist = useSelector((state) => state.wishlist.items);
 
-  const isInWishlist = wishlist.includes(productId);
+  const isInWishlist = wishlist ? wishlist.includes(productId) : false;
 
   const handleWishlistToggle = async (e) => {
     e.stopPropagation();
@@ -75,7 +75,13 @@ const AddToWishlist = () => {
       onClick={handleWishlistToggle}
     >
       <HeartIcon
-        className={`w-5 h-5 text-pink-500 ${isAnimating ? "wishlist-animation-in" : ""} ${isInWishlist ? "fill-pink-500 group-hover:fill-transparent" : "group-hover:fill-pink-500"}`}
+        className={`w-5 h-5 text-pink-500 ${
+          isAnimating ? "wishlist-animation-in" : ""
+        } ${
+          isInWishlist
+            ? "fill-pink-500 group-hover:fill-transparent"
+            : "group-hover:fill-pink-500"
+        }`}
       />
       {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
     </Button>

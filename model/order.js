@@ -92,7 +92,7 @@ const OrderSchema = new Schema(
       type: String,
       enum: ["confirmed", "pending", "delivered", "canceled"],
       required: true,
-      default: "confirmed",
+      default: "pending",
       lowercase: true,
     },
 

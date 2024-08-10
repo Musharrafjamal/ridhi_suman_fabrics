@@ -19,7 +19,6 @@ const Page = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/order/${id}`
       );
       res = await res.json();
-      console.log(res);
       setData(res);
     } catch (error) {
       toast.error("Failed to fetch Orders", error);

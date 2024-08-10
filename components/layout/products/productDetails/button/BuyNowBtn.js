@@ -53,20 +53,21 @@ const BuyNowBtn = ({
 
     if (product.ok) {
       router.push("/checkout");
-      dispatch(addItemToCart(data));
 
-      dispatch(
-        updateCart({
-          totalQuantity: cart.totalQuantity + 1,
-          totalPrice:
-            Number(cart.totalPrice) +
-            Number((price - (discount / 100) * price).toFixed(2)),
-        })
-      );
+      if (cart.totalQuantity === 0) {
+        dispatch(addItemToCart(data));
 
-      toast.success("Product added to cart.");
+        dispatch(
+          updateCart({
+            totalQuantity: 1,
+            totalPrice: Number((price - (discount / 100) * price).toFixed(2)),
+          })
+        );
+
+        toast.success("Product added to cart.");
+      }
     } else {
-      toast.error(data);
+      toast.error(data.message || data.error || data);
     }
   };
 

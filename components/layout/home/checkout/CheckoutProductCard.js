@@ -3,7 +3,6 @@
 import ImageContainer from "@/components/ui/ImageContainer";
 
 const CheckoutProductCard = ({ data }) => {
-  console.log(data);
   return (
     <div className="border border-gray-300 rounded-xl p-2.5 flex gap-3 bg-white shadow-sm relative">
       <div className="w-4/12 min-h-28">
@@ -14,11 +13,14 @@ const CheckoutProductCard = ({ data }) => {
         <p className="font-bold capitalize">{data.title}</p>
         <div className="flex gap-1 items-center">
           <p className="text-green-500 font-medium">
-            ₹ <span>{data.price - (data.discount * data.price) / 100}</span>
+            ₹{" "}
+            <span>
+              {(data.price - (data.discount * data.price) / 100).toFixed(2)}
+            </span>
           </p>
 
           <p className="text-xs line-through">
-            ₹ <span>{data.price}</span>
+            ₹ <span>{data.price.toFixed(2)}</span>
           </p>
         </div>
         <p className="text-gray-700 text-sm">

@@ -35,11 +35,6 @@ const OrderInfoCard = ({ data, setData }) => {
           data={formatDate(data.createdAt)}
         />
         <DataCard
-          icon={<CiCalendarDate size={20} />}
-          title="Delivery Date"
-          data="August 3 2024"
-        />
-        <DataCard
           icon={<IoPricetagOutline size={20} />}
           title="Payment Method"
           data={data.paymentMethod}

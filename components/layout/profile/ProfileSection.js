@@ -29,7 +29,7 @@ const ProfileCard = () => {
           alt="Profile Picture"
           fill
           style={{
-            objectFit: "contain",
+            objectFit: "cover",
             objectPosition: "top",
           }}
         />

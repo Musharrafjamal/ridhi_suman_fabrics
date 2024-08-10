@@ -2,10 +2,10 @@
 "use client";
 import Heading from "@/components/ui/heading/Heading";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
-import { LiaShippingFastSolid } from "react-icons/lia";
 import { BiMap, BiMapPin, BiBuilding } from "react-icons/bi";
 import DataCard from "./DataCard";
 import { FaRegUser } from "react-icons/fa6";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 const UserInfoCard = ({ data }) => {
   return (
@@ -20,12 +20,12 @@ const UserInfoCard = ({ data }) => {
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-2 p-2">
         <DataCard
-          icon={<BiBuilding size={20} />}
+          icon={<UserIcon className="w-5 h-5" />}
           title="FullName"
           data={data.name}
         />
         <DataCard
-          icon={<AiOutlinePhone size={20} />}
+          icon={<AiOutlinePhone size={20} className="rotate-90" />}
           title="Phone Number"
           data={data.phoneNumber}
         />

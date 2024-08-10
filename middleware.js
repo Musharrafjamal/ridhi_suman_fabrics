@@ -18,7 +18,10 @@ export async function middleware(request) {
 
     // Add CORS headers
     // res.headers.append("Access-Control-Allow-Credentials", "true");
-    // res.headers.append("Access-Control-Allow-Origin", "https://example.com");
+    // res.headers.append(
+    //   "Access-Control-Allow-Origin",
+    //   "https://www.ridhisumanfabrics.com"
+    // );
     // res.headers.append(
     //   "Access-Control-Allow-Methods",
     //   "GET,DELETE,PATCH,POST,PUT,OPTIONS"
@@ -39,9 +42,9 @@ export async function middleware(request) {
 
     if (
       !token &&
-      (url.pathname.startsWith("/my-orders") ||
-        url.pathname.startsWith("/wishlist") ||
-        url.pathname.startsWith("/profile"))
+      (url.pathname.startsWith("/my-orders/:path*") ||
+        url.pathname.startsWith("/wishlist/:path*") ||
+        url.pathname.startsWith("/profile/:path*"))
     ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }

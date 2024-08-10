@@ -19,7 +19,6 @@ const ListOfCoupon = ({ open, setOpen, setTotalAmount }) => {
       const response = await fetch("/api/coupon");
       const data = await response.json();
       setCouponList(data);
-      console.log(data);
     } catch (error) {
       toast.error("Error fetching coupons");
     }

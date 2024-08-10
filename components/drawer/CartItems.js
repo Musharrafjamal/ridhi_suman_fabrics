@@ -71,11 +71,14 @@ const CartItems = ({ data }) => {
         <div>
           <div className="flex gap-1 items-center">
             <p className="text-green-500 font-medium">
-              ₹ <span>{data.price - (data.discount * data.price) / 100}</span>
+              ₹{" "}
+              <span>
+                {(data.price - (data.discount * data.price) / 100).toFixed(2)}
+              </span>
             </p>
 
             <p className="text-xs line-through">
-              ₹ <span>{data.price}</span>
+              ₹ <span>{data.price.toFixed(2)}</span>
             </p>
           </div>
 

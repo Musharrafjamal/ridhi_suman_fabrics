@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
       .populate("user", "name phoneNumber image")
       .populate(
         "cartItems.productId",
-        "title price discount _id image category subCategory"
+        "title price discount _id images category subCategory"
       );
 
     if (!order) {

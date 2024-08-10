@@ -76,7 +76,9 @@ const PaymentStatusPage = () => {
             Your transaction has been completed successfully.
           </p>
           <Link href={`/my-orders/${orderId}`}>
-            <Button variant="gradient" color="teal">Check order</Button>
+            <Button variant="gradient" color="teal">
+              Check order
+            </Button>
           </Link>
         </div>
       ) : (
@@ -101,9 +103,20 @@ const PaymentStatusPage = () => {
           <p className="text-gray-600 mb-4">
             There was an issue with your transaction. Please try again.
           </p>
-          <Link href={`/`}>
-            <Button variant="gradient" color="pink">Home</Button>
-          </Link>
+          <div className="flex items-center gap-2 justify-center">
+            <Link href={`/`}>
+              <Button variant="gradient" color="pink">
+                Home
+              </Button>
+            </Link>
+            <Button
+              onClick={() => window.location.reload()}
+              variant="gradient"
+              color="teal"
+            >
+              Refresh
+            </Button>
+          </div>
         </div>
       )}
     </div>

@@ -41,7 +41,7 @@ const OrderCard = ({ order }) => {
           ) : (
             <div>Total Products: {order.cartItems.length}</div>
           )}
-          <div>Total Amount: {order.totalAmount}</div>
+          <div>Total Amount: {order.totalAmount.toFixed(2)}</div>
           <div>
             Status:{" "}
             <span className={`${statusColors[status]}`}> {order.status}</span>
