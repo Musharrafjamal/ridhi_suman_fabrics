@@ -5,6 +5,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import React from "react";
 import AddToCartBtn from "./button/AddToCartBtn";
 import BuyNowBtn from "./button/BuyNowBtn";
+import { toast } from "sonner";
 
 const ProductSizeColor = ({
   sizes,
@@ -16,6 +17,8 @@ const ProductSizeColor = ({
   product,
 }) => {
   const { data: session, status } = useSession();
+
+  console.log(sizes);
 
   return status === "loading" ? (
     <div className="flex justify-center items-center my-8">
@@ -110,23 +113,27 @@ const ProductSizeColor = ({
             .map((color, idx) => {
               const isSelected =
                 selectedColor === color.colour.name.toLowerCase();
-              const isOutOfStock = color.quantity === "0";
+              const isOutOfStock = color.quantity <= 0;
               const commonClasses = `flex flex-row border px-3 py-1 rounded-md items-center gap-2 ${
                 isSelected
                   ? "border-[#52057B] text-[#52057B] bg-[#F0E5FF]"
                   : "border-black text-black"
               } ${
                 isOutOfStock
-                  ? "opacity-50 cursor-not-allowed"
+                  ? "opacity-50 cursor-not-allowed border-opacity-50"
                   : "cursor-pointer"
               }`;
 
               return (
                 <div
                   className={commonClasses}
-                  onClick={() =>
-                    handleSelectedColor(color.colour.name, color.colour.hex)
-                  }
+                  onClick={() => {
+                    if(isOutOfStock){
+                      toast.error(`${color.colour.name} colour is out of stock!, please select another colour.`)
+                      return;
+                    }
+                    handleSelectedColor(color.colour.name, color.colour.hex);
+                  }}
                   key={idx}
                 >
                   <div
@@ -135,9 +142,7 @@ const ProductSizeColor = ({
                     title={color.colour.name}
                   ></div>
                   <div
-                    className={`text-xs ${
-                      isOutOfStock ? "opacity-50 text-red" : ""
-                    }`}
+                    className={`text-xs ${isOutOfStock ? "opacity-50" : ""}`}
                     title={color.colour.name}
                   >
                     {color.colour.name}

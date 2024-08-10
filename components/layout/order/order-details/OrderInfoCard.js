@@ -63,7 +63,7 @@ const OrderInfoCard = ({ data, setData }) => {
         {data.status === "canceled" ? (
           <DataCard
             icon={<TbMessageCancel size={20} />}
-            title="Cancellation Reason "
+            title="Cancellation Reason"
             data={data.cancellationReason}
           />
         ) : (
@@ -78,6 +78,28 @@ const OrderInfoCard = ({ data, setData }) => {
           </Button>
         )}
       </div>
+      {/* {data.status !== "confirmed" ||
+        ("delivered" && (
+          <div className="ml-2">
+            {data.status === "canceled" ? (
+              <DataCard
+                icon={<TbMessageCancel size={20} />}
+                title="Cancellation Reason"
+                data={data.cancellationReason}
+              />
+            ) : (
+              <Button
+                variant="outlined"
+                className="text-red-500 border-red-500  w-fit py-2 px-3"
+                onClick={() => {
+                  setOpenDeleteDialog(true);
+                }}
+              >
+                Cancel Order
+              </Button>
+            )}
+          </div>
+        ))} */}
       <CancelOrder
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
