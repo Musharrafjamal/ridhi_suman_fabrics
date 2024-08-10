@@ -35,7 +35,7 @@ const ProfileCard = () => {
         />
       </CardHeader>
 
-      <CardBody className="text-left flex justify-center items-center sm:items-start flex-col w-full">
+      <CardBody className="text-left flex justify-center sm:items-start flex-col w-full">
         <div className="flex items-center gap-4 capitalize mb-4 sm:mb-8">
           <UserIcon className="inline-block h-10 w-10" size={20} />
 
@@ -48,7 +48,7 @@ const ProfileCard = () => {
           </Typography>
         </div>
 
-        <div className="flex items-center gap-4 mb-2 ml-0 sm:ml-3">
+        <div className="flex items-center gap-4 mb-2 ml-3">
           <MdEmail className="inline-block" size={20} />
 
           <Typography
@@ -60,7 +60,7 @@ const ProfileCard = () => {
           </Typography>
         </div>
 
-        <div className="flex items-center gap-4 ml-0 sm:ml-3">
+        <div className="flex items-center gap-4  ml-3">
           <PhoneIcon className="inline-block h-5 w-5" />
 
           <Typography

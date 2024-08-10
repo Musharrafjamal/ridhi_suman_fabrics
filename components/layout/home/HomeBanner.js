@@ -4,7 +4,7 @@ import { bannerData } from "@/utils/HomePageData";
 
 const HomeBanner = () => {
   return (
-    <div className="flex w-full px-2">
+    <div className="flex w-full px-2 -my-8 sm:my-0">
       {bannerData.slice(0, 3).map((banner, index) => (
         <div
           className={`relative h-80 ${
