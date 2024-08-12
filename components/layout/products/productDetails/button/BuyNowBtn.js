@@ -35,14 +35,6 @@ const BuyNowBtn = ({
     }
 
     const existingCartItem = cart.items.find((item) => {
-      console.log(
-        item._id,
-        productId,
-        item.color.hex,
-        productHex,
-        item.size,
-        productSize
-      );
       return (
         item._id === productId &&
         item.color.hex === productHex &&
