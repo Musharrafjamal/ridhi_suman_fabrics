@@ -45,7 +45,7 @@ const ProductSizeColor = ({
                   {colourIdx === 0 && (
                     <td
                       rowSpan={size.colours.length}
-                      className="py-2 px-4 border-b text-center align-middle"
+                      className="py-2 px-4 border-b text-center align-middle uppercase"
                     >
                       {size.size}
                     </td>
@@ -60,7 +60,9 @@ const ProductSizeColor = ({
                       style={{ background: `${colour.colour.hex}` }}
                       className="w-3 h-3 rounded-full"
                     ></div>
-                    <div className="w-1/3">{colour.colour.name}</div>
+                    <div className="min-w-20 text-left capitalize">
+                      {colour.colour.name}
+                    </div>
                   </td>
                   <td
                     className="py-2 px-4 border-b text-center"
@@ -88,7 +90,7 @@ const ProductSizeColor = ({
           {sizes.map((item, index) => (
             <div
               key={index}
-              className={`border px-3 py-1 rounded-md cursor-pointer text-xs ${
+              className={`border px-3 py-1 rounded-md cursor-pointer text-xs uppercase ${
                 selectedSize === item.size
                   ? "border-[#52057B] text-[#52057B] bg-[#F0E5FF]"
                   : "border-black text-black"
@@ -128,8 +130,10 @@ const ProductSizeColor = ({
                 <div
                   className={commonClasses}
                   onClick={() => {
-                    if(isOutOfStock){
-                      toast.error(`${color.colour.name} colour is out of stock!, please select another colour.`)
+                    if (isOutOfStock) {
+                      toast.error(
+                        `${color.colour.name} colour is out of stock!, please select another colour.`
+                      );
                       return;
                     }
                     handleSelectedColor(color.colour.name, color.colour.hex);
@@ -142,7 +146,9 @@ const ProductSizeColor = ({
                     title={color.colour.name}
                   ></div>
                   <div
-                    className={`text-xs ${isOutOfStock ? "opacity-50" : ""}`}
+                    className={`text-xs capitalize ${
+                      isOutOfStock ? "opacity-50 text-red" : ""
+                    }`}
                     title={color.colour.name}
                   >
                     {color.colour.name}
