@@ -118,7 +118,7 @@ const CreateCoupon = ({ open, setOpen, setCouponCode }) => {
           required
         />
         <Input
-          label="Maximum Amount"
+          label="Maximum Discount Amount"
           name="maxAmt"
           value={formData.maxAmt}
           onChange={handleNumChange}
