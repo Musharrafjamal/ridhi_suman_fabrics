@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function OwnerImageSection() {
   return (
-    <div className="bg-white p-8 flex flex-col  lg:flex-row items-center lg:h-full">
-      <div className="w-full lg:w-1/2 flex justify-center ;g:h-full">
+    <div className="bg-white p-2 flex flex-col  lg:flex-row items-center lg:h-full">
+      <div className="w-full lg:w-1/2 flex justify-center lg:h-full">
         <Image
           src="https://img.freepik.com/free-vector/best-seller-award-badge-label-design-your-product_1017-12388.jpg"
           alt="Award Ceremony"
@@ -30,7 +30,7 @@ export default function OwnerImageSection() {
         </p>
         <ul className="list-none space-y-4 text-gray-700">
           <li className="flex items-start">
-            <span className="text-red-600 mr-2">&#10003;</span>
+            <span className="text-red-600 mr-2 hidden sm:block">&#10003;</span>
             <p>
               <strong>Diverse Range:</strong> Our extensive collection spans a
               wide range of saree types, from the timeless Banarasi silk to the
@@ -39,7 +39,7 @@ export default function OwnerImageSection() {
             </p>
           </li>
           <li className="flex items-start">
-            <span className="text-red-600 mr-2">&#10003;</span>
+            <span className="text-red-600 mr-2 hidden sm:block">&#10003;</span>
             <p>
               <strong>Quality Assurance:</strong> We prioritize quality. Each
               saree is crafted using premium fabrics and undergoes rigorous
@@ -48,7 +48,7 @@ export default function OwnerImageSection() {
             </p>
           </li>
           <li className="flex items-start">
-            <span className="text-red-600 mr-2">&#10003;</span>
+            <span className="text-red-600 mr-2 hidden sm:block">&#10003;</span>
             <p>
               <strong>Customization Options:</strong> We understand that
               individual preferences vary. That’s why we offer customization
@@ -57,7 +57,7 @@ export default function OwnerImageSection() {
             </p>
           </li>
           <li className="flex items-start">
-            <span className="text-red-600 mr-2">&#10003;</span>
+            <span className="text-red-600 mr-2 hidden sm:block">&#10003;</span>
             <p>
               <strong>Affordable Luxury:</strong> Experience the joy of draping
               yourself in luxurious Indian sarees without breaking the bank. Our

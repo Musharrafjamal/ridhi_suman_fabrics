@@ -66,7 +66,7 @@ const CartItems = ({ data }) => {
       </div>
 
       <div className="flex flex-col justify-between py-1 w-full">
-        <p className="font-bold capitalize">{data.title}</p>
+        <p className="font-bold capitalize w-36 truncate">{data.title}</p>
 
         <div>
           <div className="flex gap-1 items-center">

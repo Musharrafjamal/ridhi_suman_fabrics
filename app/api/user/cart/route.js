@@ -86,7 +86,6 @@ export async function PUT(req) {
       color = null,
       size = null,
     } = await req.json();
-    console.log(productId, quantity, color, size);
 
     if (!productId || !quantity) {
       return NextResponse.json("Invalid product data", { status: 400 });
@@ -112,11 +111,46 @@ export async function PUT(req) {
 
     if (productIndex > -1) {
       if (color && size) {
-        console.log("color and size", color, size);
         if (!color.name || !color.hex || !size) {
           return NextResponse.json("Color and size must be defined", {
             status: 400,
           });
+        }
+
+        if (quantity > 0) {
+          const productSize = productExists.sizes.find(
+            (s) => s.size === user.cart[productIndex].size
+          );
+
+          if (!productSize) {
+            return NextResponse.json("Size not found", {
+              status: 404,
+            });
+          }
+
+          const productColor = productSize.colours.find((c) => {
+            return (
+              c.colour.name.toLowerCase() === user.cart[productIndex].color.name
+            );
+          });
+
+          if (!productColor) {
+            return NextResponse.json("Color not found", {
+              status: 404,
+            });
+          }
+
+          if (
+            productColor.quantity <
+            user.cart[productIndex].quantity + quantity
+          ) {
+            return NextResponse.json(
+              `Cannot increase more product quantity. Only ${user.cart[productIndex].quantity} available.`,
+              {
+                status: 400,
+              }
+            );
+          }
         }
 
         user.cart[productIndex].quantity += quantity;

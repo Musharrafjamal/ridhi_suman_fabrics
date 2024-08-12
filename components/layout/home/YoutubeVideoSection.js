@@ -7,7 +7,7 @@ export default function YoutubeVideo() {
 
   const videos = [
     {
-      url: "https://www.youtube.com/embed/H8Lyj2D_cWo",
+      url: "https://www.youtube.com/embed/LfVFcCKIbcc?si=gI9cJiEbqiBrsyPO",
       views: "250K+ VIEWS",
     },
     {
@@ -41,7 +41,7 @@ export default function YoutubeVideo() {
             onMouseLeave={() => setPlayingIndex(null)}
             onClick={() => window.open(video.url, "_blank")}
           >
-            <div className="w-full h-48 rounded-lg overflow-hidden">
+            <div className="w-full h-56 rounded-lg overflow-hidden">
               <iframe
                 src={`${video.url}?autoplay=${
                   playingIndex === index ? 1 : 0
@@ -75,14 +75,15 @@ export default function YoutubeVideo() {
       </div>
 
       <div
-        className="text-center mt-6"
+        className="mt-6 w-fit text-sm hover:cursor-pointer rounded-full border border-black capitalize px-6 py-2 hover:shadow-lg hover:bg-black hover:text-white transition-all duration-300 ease-in-out mx-auto"
         onClick={() =>
-          window.open("https://www.youtube.com/@piyushgargdev", "_blank")
+          window.open(
+            "https://www.youtube.com/@riddhisumanfabricsz/videos",
+            "_blank"
+          )
         }
       >
-        <Button className="bg-white text-gray-800 border border-gray-300 rounded shadow hover:bg-gray-100">
-          VIEW MORE VIDEOS
-        </Button>
+        VIEW MORE
       </div>
     </section>
   );

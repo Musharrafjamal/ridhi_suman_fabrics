@@ -171,7 +171,7 @@ const CheckoutPage = () => {
             The sum of all total payments for goods there
           </Typography>
 
-          <div className="max-h-96 overflow-y-auto">
+          <div className="max-h-96 overflow-y-auto space-y-4">
             {cart.items?.map((product, index) => (
               <CheckoutProductCard key={product._id} data={product} />
             ))}
