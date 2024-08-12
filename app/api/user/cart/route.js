@@ -86,7 +86,6 @@ export async function PUT(req) {
       color = null,
       size = null,
     } = await req.json();
-    console.log(productId, quantity, color, size);
 
     if (!productId || !quantity) {
       return NextResponse.json("Invalid product data", { status: 400 });

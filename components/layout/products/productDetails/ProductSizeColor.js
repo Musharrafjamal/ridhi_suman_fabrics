@@ -3,9 +3,10 @@ import { useSession } from "next-auth/react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import React from "react";
-import AddToCartBtn from "./button/AddToCartBtn";
-import BuyNowBtn from "./button/BuyNowBtn";
 import { toast } from "sonner";
+
+import BuyNowBtn from "./button/BuyNowBtn";
+import AddToCartBtn from "./button/AddToCartBtn";
 
 const ProductSizeColor = ({
   sizes,
@@ -17,8 +18,6 @@ const ProductSizeColor = ({
   product,
 }) => {
   const { data: session, status } = useSession();
-
-  console.log(sizes);
 
   return status === "loading" ? (
     <div className="flex justify-center items-center my-8">
