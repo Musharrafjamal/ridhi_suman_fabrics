@@ -3,77 +3,29 @@ import Heading from "@/components/ui/heading/Heading";
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import DataCard from "./DataCard";
-import { CiCalendarDate, CiCircleInfo } from "react-icons/ci";
-import { RiPriceTag2Line, RiSecurePaymentLine } from "react-icons/ri";
+import { CiCalendarDate } from "react-icons/ci";
+import { RiPriceTag2Line } from "react-icons/ri";
 import { TiCancelOutline } from "react-icons/ti";
-import { TbMessageCancel } from "react-icons/tb";
 import { IoPricetagOutline } from "react-icons/io5";
-import { PiContactlessPaymentLight } from "react-icons/pi";
+import {
+  PiContactlessPaymentLight,
+  PiPathFill,
+} from "react-icons/pi";
 import CancelOrder from "./CancelOrder";
 import { MdInfoOutline } from "react-icons/md";
 import { useSession } from "next-auth/react";
 import { IoMdCall } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa";
+import { GoAlertFill } from "react-icons/go";
 import Link from "next/link";
+import TooltipFooter from "@/components/ui/Tooltip";
 
 const OrderInfoCard = ({ data, setData }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
   const { data: session } = useSession();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  const renderButtons = () => {
-    switch (data.status) {
-      case "pending":
-        return (
-          <>
-            {session.user.role === "admin" && (
-              <Button
-                variant="outlined"
-                className="text-red-500 border-red-500 w-fit py-2 px-3"
-                onClick={() => setOpenDeleteDialog(true)}
-              >
-                Cancel Order
-              </Button>
-            )}
-            {session.user.role === "admin" && data.isPaid ? (
-              <Button className="text-white bg-green-500 w-fit py-2 px-4 ml-5">
-                Accept
-              </Button>
-            ) : (
-              ""
-            )}
-          </>
-        );
-      case "confirmed":
-        return (
-          <>
-            {session.user.role === "admin" && (
-              <Button
-                variant="outlined"
-                className="text-red-500 border-red-500 w-fit py-2 px-3"
-                onClick={() => setOpenDeleteDialog(true)}
-              >
-                Cancel Order
-              </Button>
-            )}
-            <Button className="text-white bg-blue-500 w-fit py-2 px-3 ml-2">
-              Track Order
-            </Button>
-          </>
-        );
-      case "delivered":
-        return (
-          <Button className="text-white bg-blue-500 w-fit py-2 px-3">
-            Track Order
-          </Button>
-        );
-      default:
-        return null;
-    }
   };
 
   return (
@@ -86,16 +38,16 @@ const OrderInfoCard = ({ data, setData }) => {
         }
         title={"ORDER INFORMATION"}
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-2 p-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 p-2">
+        <DataCard
+          icon={<IoPricetagOutline size={20} />}
+          title="Order Id"
+          data={data?.shiprocketOrderId}
+        />
         <DataCard
           icon={<CiCalendarDate size={20} />}
           title="Order Date"
           data={formatDate(data.createdAt)}
-        />
-        <DataCard
-          icon={<IoPricetagOutline size={20} />}
-          title="Payment Method"
-          data={data.paymentMethod}
         />
         <DataCard
           icon={<RiPriceTag2Line size={20} />}
@@ -122,38 +74,68 @@ const OrderInfoCard = ({ data, setData }) => {
           />
         )}
       </div>
-      <div className="ml-2">{renderButtons()}</div>
+      {!data.isPaid && (
+        <div className="border-l-2 border-pink-500 text-gray-700 pl-4 pb-1 ml-2">
+          <h2 className="flex items-center gap-2 font-semibold text-lg mb-2 text-pink-700">
+            <GoAlertFill />
+            Payment failed!
+          </h2>
+
+          <ul className="list-disc ml-4 space-y-2">
+            <li className="text-sm">
+              Payment transaction id: {data.transactionId && data.transactionId}
+            </li>
+            <li className="text-sm">
+              Refundable amount will be credited within 2-3 business days!
+            </li>
+          </ul>
+        </div>
+      )}
       {session.user.role === "user" && (
         <div className="flex flex-col gap-3 ml-2">
           <p className="text-gray-500">
             Contact us for any enquiry, we are available to serve you 24/7
           </p>
-          <div className="flex gap-5 relative">
-            <Link href={"/contactUs"}>
+          <div className="flex gap-4 flex-col md:flex-row">
+            {data.status === "confirmed" ||
+              (data.status === "delivered" && (
+                <Link
+                  target="_blank"
+                  href={`https://www.shiprocket.in/shipment-tracking/`}
+                >
+                  <Button
+                    variant="gradient"
+                    color="pink"
+                    className="flex items-center gap-1 w-full justify-center md:w-fit h-full"
+                    size="sm"
+                  >
+                    <PiPathFill size={18} />
+                    Track order
+                  </Button>
+                </Link>
+              ))}
+
+            <TooltipFooter label="+91 8000400004">
+              <Link href={"/contactUs"}>
+                <Button
+                  variant="outlined"
+                  size="sm"
+                  className="w-full  text-[#11998E] border-[#11998E] flex gap-1 items-center justify-center whitespace-nowrap"
+                >
+                  <IoMdCall size={18} />
+                  Call us
+                </Button>
+              </Link>
+            </TooltipFooter>
+            <Link href={"https://wa.me/918000400004"} target="_blank">
               <Button
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-                variant="outlined"
-                className=" text-[#11998E] border-[#11998E] shadow-none w-fit flex gap-1 items-center py-2 px-3"
+                className="w-full text-white bg-[#11998E] border-[#11998E] gap-1 justify-center flex whitespace-nowrap items-center"
+                size="sm"
               >
-                <IoMdCall size={18} />
-                Call us
+                <FaWhatsapp size={20} />
+                Chat on whatsapp
               </Button>
-              {showTooltip && (
-                <div className="w-32 text-center absolute left-28 top-0 bg-white text-gray-800 text-xs rounded py-1 px-2 border z-50">
-                  +91 8000400004
-                </div>
-              )}
             </Link>
-            <Button
-              className="text-white bg-[#11998E] border-[#11998E] w-fit gap-1 flex relative items-center px-3 md:px-6 py-2"
-              onClick={() =>
-                window.open("https://wa.me/918000400004", "_blank")
-              }
-            >
-              <FaWhatsapp className=" text-sm md:text-base" />
-              Chat on whatsapp
-            </Button>
           </div>
         </div>
       )}

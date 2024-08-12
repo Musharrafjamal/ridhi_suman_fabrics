@@ -125,7 +125,12 @@ const ProductSchema = new Schema(
   }
 );
 
-ProductSchema.index({ description: "text", title: "text", fabric: "text" });
+ProductSchema.index({
+  description: "text",
+  title: "text",
+  fabric: "text",
+  brand: "text",
+});
 
 export default mongoose.models.Product ||
   mongoose.model("Product", ProductSchema);

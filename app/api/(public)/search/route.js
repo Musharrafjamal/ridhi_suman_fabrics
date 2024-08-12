@@ -24,9 +24,10 @@ export async function GET(request) {
     const page = parseInt(url.searchParams.get("page"), 10) || 1;
     const limit = parseInt(url.searchParams.get("size"), 10) || 12;
 
-    const skip = (page - 1) * limit;
+    const queryArray = searchQuery.split(" ")
 
-    const sanitizedQuery = searchQuery.replace(/[\W_]+/g, "");
+    const skip = (page - 1) * limit;
+    const sanitizedQuery = queryArray[0].replace(/[\W_]+/g, "");
 
     let products, totalProducts;
 
@@ -56,6 +57,7 @@ export async function GET(request) {
         visibility: true,
       });
     }
+
     return NextResponse.json({
       data: products,
       meta: {

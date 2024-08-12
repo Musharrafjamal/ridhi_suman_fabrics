@@ -12,7 +12,7 @@ const SmProductCard = ({ product, qty, size, color, colorHex }) => {
         </div>
         <div className="flex w-full pt-3 md:pt-0">
           <div className="flex flex-col gap-1 w-full ">
-            <div className="border border-gray-500 w-fit text-xs px-2 py-1 rounded-md flex items-center gap-1 capitalize">
+            <div className="border border-gray-500 w-fit text-xs px-2 py-1 rounded-md flex items-center gap-1 whitespace-nowrap capitalize">
               {product.category} /
               <span className="">{product.subCategory.name}</span>
             </div>
@@ -29,7 +29,7 @@ const SmProductCard = ({ product, qty, size, color, colorHex }) => {
                 <p className="text-sm text-gray-500">Quantity: {qty}</p>
               </div>
               <p className="text-sm text-gray-500 flex items-center gap-1">
-                Size & Color: <div className="uppercase">{size}</div> | 
+                <div className="hidden md:block">Size & Color: </div><div className="uppercase">{size}</div> | 
                 <div
                   className="w-3 h-3 rounded-full"
                   style={{ background: `${colorHex}` }}

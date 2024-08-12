@@ -21,7 +21,7 @@ const UserInfoCard = ({ data }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-2 p-2">
         <DataCard
           icon={<UserIcon className="w-5 h-5" />}
-          title="FullName"
+          title="Full name"
           data={data.name}
         />
         <DataCard

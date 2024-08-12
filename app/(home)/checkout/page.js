@@ -250,7 +250,7 @@ const CheckoutPage = () => {
           </div>
 
           <Button
-            className="rounded w-full"
+            className="rounded w-full flex justify-center items-center"
             variant="gradient"
             size="lg"
             onClick={handleSubmitOrder}
