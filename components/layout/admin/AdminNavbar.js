@@ -64,7 +64,7 @@ function NavList() {
         </Link>
       </div>
 
-      <div className="lg:flex grid grid-cols-1 sm:grid-cols-3 gap- w-full xl:w-fit">
+      <div className="lg:flex grid grid-cols-1 sm:grid-cols-3 gap- w-full">
         <Link href={"/admin/dashboard"}>
           <Button
             className="whitespace-nowrap w-full justify-center flex items-center gap-2 rounded"
@@ -184,7 +184,9 @@ export default function AdminNavbar() {
     <div className="w-full shadow-sm px-4 py-2">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Link href={"/"}>
-          <Image src="/ridhi-logo.png" alt="brand" width={150} height={150} />
+          <div className="min-w-[110px]">
+            <Image src="/ridhi-logo.png" alt="brand" width={150} height={150} />
+          </div>
         </Link>
         <div className="hidden xl:block w-full">
           <NavList />

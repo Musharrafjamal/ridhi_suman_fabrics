@@ -54,7 +54,7 @@ const ProductCarousel = ({ products, label = "" }) => {
   };
 
   return (
-    <section className="my-10">
+    <section className="my:0 md:my-10">
       {label.length !== 0 && (
         <SectionHeading label={label} className="text-pink-400" />
       )}
