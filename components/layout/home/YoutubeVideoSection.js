@@ -1,27 +1,26 @@
 "use client";
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
-import dynamic from "next/dynamic";
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+
 export default function YoutubeVideo() {
   const [playingIndex, setPlayingIndex] = useState(null);
 
   const videos = [
     {
-      url: "https://youtu.be/H8Lyj2D_cWo?si=vQ7raZ0AKDdHmwjS",
+      url: "https://www.youtube.com/embed/H8Lyj2D_cWo",
       views: "250K+ VIEWS",
     },
     {
-      url: "https://youtu.be/_eJ6KAb56Gw?si=Cp0R9lg4TTxowR5S",
+      url: "https://www.youtube.com/embed/_eJ6KAb56Gw",
     },
     {
-      url: "https://youtu.be/V7zkC5aPvoY?si=cZKF_kMqFPkyaD8x",
+      url: "https://www.youtube.com/embed/V7zkC5aPvoY",
     },
   ];
 
   return (
     <section className="mb-10">
-      <div className="text-center w-full lg:w-1/2 mx-auto ">
+      <div className="text-center w-full lg:w-1/2 mx-auto">
         <h2 className="text-red-600 text-2xl font-semibold">
           Most Popular Latest Videos From Our Youtube Channel
         </h2>
@@ -43,13 +42,14 @@ export default function YoutubeVideo() {
             onClick={() => window.open(video.url, "_blank")}
           >
             <div className="w-full h-48 rounded-lg overflow-hidden">
-              <ReactPlayer
-                url={video.url}
-                playing={playingIndex === index}
-                muted
-                width="100%"
-                height="100%"
-                controls={false}
+              <iframe
+                src={`${video.url}?autoplay=${
+                  playingIndex === index ? 1 : 0
+                }&mute=1`}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                className="w-full h-full"
               />
             </div>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -80,7 +80,7 @@ export default function YoutubeVideo() {
           window.open("https://www.youtube.com/@piyushgargdev", "_blank")
         }
       >
-        <Button className="bg-white text-gray-800 border border-gray-300   rounded shadow hover:bg-gray-100">
+        <Button className="bg-white text-gray-800 border border-gray-300 rounded shadow hover:bg-gray-100">
           VIEW MORE VIDEOS
         </Button>
       </div>
