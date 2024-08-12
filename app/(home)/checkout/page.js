@@ -37,14 +37,14 @@ const CheckoutPage = () => {
   }, [cart?.totalPrice]);
   const router = useRouter();
   const { data: session, status } = useSession();
-
+  const [paymentLoading, setPaymentLoading] = useState(false);
   const handleSubmitOrder = async () => {
     try {
       if (cart.items.length <= 0) {
         toast.error("Minimum one product is required");
         return;
       }
-
+      setPaymentLoading(true);
       if (
         !shippingData.name ||
         !shippingData.phoneNumber ||
@@ -135,21 +135,8 @@ const CheckoutPage = () => {
             router.push(phonePeRedirectUrl);
           } else {
             toast.error("Payment initialization failed!");
-            console.log(data);
             return;
           }
-
-          // toast.success("Payment initiated!");
-          // dispatch(clearCart());
-          // setShippingData({
-          //   name: "",
-          //   phoneNumber: "",
-          //   email: "",
-          //   city: "",
-          //   state: "",
-          //   pincode: "",
-          //   address: "",
-          // });
         } catch (err) {
           toast.error("Error while submitting payment");
         }
@@ -158,6 +145,8 @@ const CheckoutPage = () => {
       }
     } catch (err) {
       toast.error("Error while submitting order");
+    } finally {
+      setPaymentLoading(false);
     }
   };
 
@@ -266,8 +255,11 @@ const CheckoutPage = () => {
             size="lg"
             onClick={handleSubmitOrder}
             color="teal"
+            loading={paymentLoading}
           >
-            Pay ₹{totalAmount + 120}
+            {paymentLoading
+              ? "Proceeding to payment"
+              : `Pay ₹${totalAmount + 120}`}
           </Button>
         </div>
       </div>

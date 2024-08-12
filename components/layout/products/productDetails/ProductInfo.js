@@ -40,7 +40,6 @@ function ProductInfo({ product }) {
       toast.warning("select size");
       return;
     }
-
     setSelectedColor(color.toLowerCase());
     setSelectedColorHex(hex);
   };

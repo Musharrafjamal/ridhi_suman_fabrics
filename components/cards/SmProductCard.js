@@ -12,7 +12,7 @@ const SmProductCard = ({ product, qty, size, color, colorHex }) => {
         </div>
         <div className="flex w-full pt-3 md:pt-0">
           <div className="flex flex-col gap-1 w-full ">
-            <div className="border border-gray-500 w-fit text-xs px-2 py-1 rounded-md flex items-center gap-1">
+            <div className="border border-gray-500 w-fit text-xs px-2 py-1 rounded-md flex items-center gap-1 capitalize">
               {product.category} /
               <span className="">{product.subCategory.name}</span>
             </div>
