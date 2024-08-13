@@ -31,7 +31,7 @@ export async function GET(request) {
     let products, totalProducts;
 
     if (isAdmin) {
-      let query = Product.find().select("-description -orders");
+      let query = Product.find().select("-description").sort({ orders: -1 });
 
       if (category !== "all") {
         query = query.where("category").equals(category);
