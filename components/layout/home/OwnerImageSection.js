@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function OwnerImageSection() {
   return (
-    <div className="bg-white mx-4 mt-0 lg:mx-8 lg:mt-4 flex flex-col lg:flex-row gap-8">
+    <div className="bg-white mx-4 mt-0 lg:mx-8 lg:mt-8 flex flex-col lg:flex-row gap-8">
       <div className="w-full lg:w-1/3 flex justify-center">
         <Image
           src="https://img.freepik.com/free-vector/best-seller-award-badge-label-design-your-product_1017-12388.jpg"
