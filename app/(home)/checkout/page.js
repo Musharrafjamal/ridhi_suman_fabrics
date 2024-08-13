@@ -129,6 +129,7 @@ const CheckoutPage = () => {
           }
 
           const data = await response.json();
+          console.log("Payment response: ",data);
           if (data.success) {
             const phonePeRedirectUrl =
               data.data.instrumentResponse.redirectInfo.url;
