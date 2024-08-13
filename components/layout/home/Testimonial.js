@@ -9,7 +9,7 @@ import { testimonials } from "../../../utils/testimonialData";
 
 function Testimonial() {
   return (
-    <div className="relative px-2">
+    <div className="relative px-2 sm:px-0">
       <div className="flex items-center justify-between h-full w-full absolute z-0">
         <div className="w-1/3 bg-white h-full" />
         <div className="w-4/6 ml-16 sm:bg-gray-100 h-[80%]" />
