@@ -82,17 +82,19 @@ const OrderSchema = new Schema(
 
     canceledBy: {
       type: String,
+      default: "user",
     },
 
     cancellationReason: {
       type: String,
+      default: "Payment Failed!"
     },
 
     status: {
       type: String,
       enum: ["confirmed", "pending", "delivered", "canceled"],
       required: true,
-      default: "pending",
+      default: "canceled",
       lowercase: true,
     },
 

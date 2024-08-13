@@ -48,10 +48,10 @@ const AddToCartBtn = ({
           productId,
           quantity: qty,
           color: {
-            name: isInCart.color?.name || productColor || null,
-            hex: isInCart.color?.hex || productHex || null,
+            name: isInCart.color?.name,
+            hex: isInCart.color?.hex,
           },
-          size: isInCart.productSize || productSize || null,
+          size: isInCart.size,
         }),
       }
     );
@@ -64,10 +64,10 @@ const AddToCartBtn = ({
           itemId: productId,
           quantity: isInCart.quantity + qty,
           color: {
-            name: productColor || null,
-            hex: productHex || null,
+            name: isInCart.color?.name,
+            hex: isInCart.color?.hex,
           },
-          size: productSize || null,
+          size: isInCart.size,
         })
       );
 

@@ -5,7 +5,11 @@ import { toast } from "sonner";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addItemToCart, updateCart } from "@/redux/slice/cartSlice";
+import {
+  addItemToCart,
+  updateCart,
+  updateItemQuantity,
+} from "@/redux/slice/cartSlice";
 
 const BuyNowBtn = ({
   price,
@@ -30,44 +34,92 @@ const BuyNowBtn = ({
       return;
     }
 
-    const product = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/cart`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId,
-          quantity: 1,
+    const existingCartItem = cart.items.find((item) => {
+      return (
+        item._id === productId &&
+        item.color.hex === productHex &&
+        item.size === productSize
+      );
+    });
+
+    if (existingCartItem) {
+      dispatch(
+        updateItemQuantity({
+          itemId: existingCartItem._id,
+          quantity: existingCartItem.quantity,
           color: {
             name: productColor,
             hex: productHex,
           },
           size: productSize,
-        }),
-      }
-    );
+        })
+      );
 
-    const data = await product.json();
+      dispatch(
+        updateCart({
+          totalQuantity: cart.items.reduce(
+            (total, item) => total + item.quantity,
+            0
+          ),
+          totalPrice: cart.items
+            .reduce(
+              (total, item) =>
+                total +
+                (item.price - (item.discount / 100) * item.price) *
+                  item.quantity,
+              0
+            )
+            .toFixed(2),
+        })
+      );
 
-    if (product.ok) {
       router.push("/checkout");
+    } else {
+      const product = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/cart`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId,
+            quantity: 1,
+            color: {
+              name: productColor,
+              hex: productHex,
+            },
+            size: productSize,
+          }),
+        }
+      );
 
-      if (cart.totalQuantity === 0) {
+      const data = await product.json();
+
+      if (product.ok) {
         dispatch(addItemToCart(data));
 
         dispatch(
           updateCart({
-            totalQuantity: 1,
-            totalPrice: Number((price - (discount / 100) * price).toFixed(2)),
+            totalQuantity:
+              cart.items.reduce((total, item) => total + item.quantity, 0) + 1,
+            totalPrice: (
+              cart.items.reduce(
+                (total, item) =>
+                  total +
+                  (item.price - (item.discount / 100) * item.price) *
+                    item.quantity,
+                0
+              ) + Number((price - (discount / 100) * price).toFixed(2))
+            ).toFixed(2),
           })
         );
 
         toast.success("Product added to cart.");
+        router.push("/checkout");
+      } else {
+        toast.error(data.message || data.error || data);
       }
-    } else {
-      toast.error(data.message || data.error || data);
     }
   };
 

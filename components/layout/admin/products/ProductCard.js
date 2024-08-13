@@ -8,12 +8,14 @@ import { CardBody, Button } from "@material-tailwind/react";
 
 import Link from "next/link";
 import Image from "next/image";
+import { FaBoxes } from "react-icons/fa";
 
 export function ProductCard({
   product,
   setOpenDeleteDialog,
   setSelectedProduct,
 }) {
+  console.log(product);
   return (
     <div className="group relative h-[32rem] flex flex-col justify-between overflow-hidden">
       <Image
@@ -29,6 +31,9 @@ export function ProductCard({
       <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-transparent to-black/40" />
 
       <div className="relative p-2 w-full flex gap-2 justify-end bg-gradient-to-b from-white/50 to-transparent">
+        <div className="w-11 h-8 bg-yellow-500 rounded-md flex justify-center items-center gap-1 font-semibold">
+        <FaBoxes />{product.orders?.length}
+        </div>
         <Link
           href={`/admin/products/${product._id}`}
           className="flex gap-2 w-8 h-8 justify-center items-center rounded-md bg-white"

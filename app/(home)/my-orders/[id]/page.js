@@ -50,8 +50,8 @@ const Page = () => {
       <div className="my-5 gap-8 flex flex-col lg:flex-row mx-auto">
         <OrderSummary data={data} />
         <div className="w-full lg:w-3/5 flex flex-col gap-5">
-          <UserInfoCard data={data.shippingInfo} />
           <OrderInfoCard data={data} setData={setData} />
+          <UserInfoCard data={data.shippingInfo} />
         </div>
       </div>
     </div>

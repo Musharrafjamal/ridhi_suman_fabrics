@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import FooterCategories from "./FooterCategories";
+import Image from "next/image";
 
 const Footer = async () => {
   const footerInfo = {
@@ -37,12 +38,23 @@ const Footer = async () => {
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm px-6">
           <span>&copy; Ridhi Suman © 2024-2025, All Rights Reserved</span>
 
-          <div className="flex space-x-4 mt-4 md:mt-0">
+          <div className="grid grid-cols-2 gap-4 md:flex mt-4 md:mt-0">
             {footerInfo.links.map((link, index) => (
-              <Link key={index} href={link.href} className="hover:underline text-xs">
+              <Link
+                key={index}
+                href={link.href}
+                className="hover:underline text-xs"
+              >
                 {link.text}
               </Link>
             ))}
+          </div>
+          <div className="flex gap-1 mt-4 md:mt-0">
+            Designed and maintain by
+            <Link href={"https://ghosting.in"} target="_blank" className="flex gap-1 items-center">
+              <div className="font-semibold text-amber-500">Ghosting Tech</div>
+              <Image src={"/Ghosting.png"} width={20} height={20} />
+            </Link>
           </div>
         </div>
       </div>

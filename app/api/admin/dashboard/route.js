@@ -40,11 +40,11 @@ export async function GET(request) {
       Product.countDocuments(),
       SetOfProduct.countDocuments(),
 
-      Order.countDocuments({ status: "Delivered" }),
+      Order.countDocuments({ status: "delivered" }),
       Order.countDocuments({
-        status: { $in: ["Confirmed", "Packed", "Shipped"] },
+        status: { $in: ["confirmed"] },
       }),
-      Order.countDocuments({ status: "Canceled" }),
+      Order.countDocuments({ status: "canceled" }),
     ]);
 
     return NextResponse.json(
