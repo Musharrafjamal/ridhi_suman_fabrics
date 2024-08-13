@@ -3,19 +3,19 @@ import Link from "next/link";
 
 export default function OwnerImageSection() {
   return (
-    <div className="bg-white p-2 flex flex-col  lg:flex-row items-center lg:h-full">
-      <div className="w-full lg:w-1/2 flex justify-center lg:h-full">
+    <div className="bg-white mx-4 mt-0 lg:mx-8 lg:mt-4 flex flex-col lg:flex-row gap-8">
+      <div className="w-full lg:w-1/3 flex justify-center">
         <Image
           src="https://img.freepik.com/free-vector/best-seller-award-badge-label-design-your-product_1017-12388.jpg"
           alt="Award Ceremony"
           width={500}
           height={1500}
-          className="rounded-lg object-cover lg:h-full  w-full "
+          className="rounded-lg object-cover"
         />
       </div>
 
-      <div className="w-full lg:w-1/2 mt-8 lg:mt-0 lg:ml-8">
-        <h1 className="text-3xl font-bold text-red-600 mb-4">
+      <div className="w-full lg:w-2/3">
+        <h1 className="text-xl lg:text-3xl font-bold text-red-600 mb-4">
           Ridhi Suman Fabrics - Rated #1 Most Trusted Textile Company in Surat,
           Gujarat (India)
         </h1>

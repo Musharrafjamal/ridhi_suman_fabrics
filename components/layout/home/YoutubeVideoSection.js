@@ -1,14 +1,11 @@
 "use client";
-import { Button } from "@material-tailwind/react";
-import React, { useState } from "react";
+import Link from "next/link";
+import React from "react";
 
 export default function YoutubeVideo() {
-  const [playingIndex, setPlayingIndex] = useState(null);
-
   const videos = [
     {
-      url: "https://www.youtube.com/embed/LfVFcCKIbcc?si=gI9cJiEbqiBrsyPO",
-      views: "250K+ VIEWS",
+      url: "https://www.youtube.com/embed/mAc0AIENA9k?si=-RJhFsRLUx9J7sY5",
     },
     {
       url: "https://www.youtube.com/embed/_eJ6KAb56Gw",
@@ -34,56 +31,29 @@ export default function YoutubeVideo() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 px-4">
         {videos.map((video, index) => (
-          <div
-            key={index}
-            className="relative group"
-            onMouseEnter={() => setPlayingIndex(index)}
-            onMouseLeave={() => setPlayingIndex(null)}
-            onClick={() => window.open(video.url, "_blank")}
-          >
-            <div className="w-full h-56 rounded-lg overflow-hidden">
+          <div key={index} className="relative group">
+            <div className="w-full h-44 md:h-[17rem] rounded-lg overflow-hidden">
               <iframe
-                src={`${video.url}?autoplay=${
-                  playingIndex === index ? 1 : 0
-                }&mute=1`}
-                frameBorder="0"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
+                src={video.url}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
                 className="w-full h-full"
-              />
+              ></iframe>
             </div>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <Button className="bg-red-500 rounded-full p-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="white"
-                  viewBox="0 0 24 24"
-                  stroke="white"
-                  className="w-6 h-6"
-                >
-                  <path d="M5 3v18l15-9L5 3z" />
-                </svg>
-              </Button>
-            </div>
-            {video.views && (
-              <div className="absolute bottom-4 left-4 bg-red-500 text-white px-2 py-1 rounded">
-                {video.views}
-              </div>
-            )}
           </div>
         ))}
       </div>
-
-      <div
-        className="mt-6 w-fit text-sm hover:cursor-pointer rounded-full border border-black capitalize px-6 py-2 hover:shadow-lg hover:bg-black hover:text-white transition-all duration-300 ease-in-out mx-auto"
-        onClick={() =>
-          window.open(
-            "https://www.youtube.com/@riddhisumanfabricsz/videos",
-            "_blank"
-          )
-        }
-      >
-        VIEW MORE
+      <div className="flex justify-center items-center w-full mt-6">
+        <Link
+          target="_blank"
+          href={"https://www.youtube.com/@riddhisumanfabricsz/videos"}
+          className="text-sm rounded-full border border-black capitalize px-6 py-2 hover:shadow-lg hover:bg-black hover:text-white transition-all duration-300 ease-in-out"
+        >
+          VIEW MORE
+        </Link>
       </div>
     </section>
   );
