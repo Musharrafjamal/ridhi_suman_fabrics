@@ -15,7 +15,14 @@ const Page = () => {
   const getProducts = async () => {
     try {
       let res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/order/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/order/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-store",
+        }
       );
       res = await res.json();
       setData(res);
