@@ -97,6 +97,14 @@ const AcceptOrderButton = ({ order, setOrders }) => {
 
       const res = await createShiprocketOrder.json();
 
+      if (!createShiprocketOrder.ok) {
+        toast.error("Failed to create order on Shiprocket");
+        return;
+      }
+
+      console.log(createShiprocketOrder);
+      console.log(res);
+
       if (createShiprocketOrder.status) {
         const updateOrder = await fetch(`/api/private/order/${order._id}`, {
           method: "PUT",
@@ -113,6 +121,14 @@ const AcceptOrderButton = ({ order, setOrders }) => {
         });
 
         const updateOrderData = await updateOrder.json();
+
+        if (!updateOrder.ok) {
+          toast.error("Failed to update order status");
+          return;
+        }
+
+        console.log(updateOrder);
+        console.log(updateOrderData);
 
         if (updateOrder.status) {
           setOrders((prevOrders) => {
