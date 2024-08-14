@@ -10,10 +10,15 @@ import { TicketIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const ListOfCoupon = ({ open, setOpen, setTotalAmount, setCouponAmount }) => {
+const ListOfCoupon = ({
+  open,
+  setOpen,
+  setTotalAmount,
+  totalAmount,
+  setCouponAmount,
+}) => {
   const handleOpen = () => setOpen(!open);
   const [couponList, setCouponList] = useState([]);
-  const dispatch = useDispatch();
   const fetchCoupons = async () => {
     try {
       const response = await fetch("/api/coupon");
@@ -34,30 +39,25 @@ const ListOfCoupon = ({ open, setOpen, setTotalAmount, setCouponAmount }) => {
       return;
     }
 
-    if (cart.totalPrice < parseInt(coupon.minAmt)) {
+    if (totalAmount < Number(coupon.minAmt)) {
       toast.error(
-        `Total cart value should be at least ₹${parseInt(coupon.minAmt)}`
+        `Total cart value should be at least ₹${Number(coupon.minAmt)}`
       );
       return;
     }
 
     // Calculate the discount amount
     let discountAmount =
-      (parseInt(coupon.discount) / 100) * parseInt(cart.totalPrice);
+      (Number(coupon.discount) / 100) * Number(totalAmount);
 
     // Ensure the discount does not exceed the maximum amount allowed by the coupon
-    if (discountAmount > parseInt(coupon.maxAmt)) {
-      discountAmount = parseInt(coupon.maxAmt);
+    if (discountAmount > Number(coupon.maxAmt)) {
+      discountAmount = Number(coupon.maxAmt);
     }
     setCouponAmount(discountAmount);
     // Calculate the new total amount after applying the coupon
-    let couponAppliedAmount = cart.totalPrice - discountAmount;
-    setTotalAmount(couponAppliedAmount);
-    // dispatch(
-    //   updateCart({
-    //     totalPrice: couponAppliedAmount,
-    //   })
-    // );
+    let couponAppliedAmount = Number(totalAmount) - Number(discountAmount);
+    setTotalAmount(couponAppliedAmount.toFixed(2));
     handleOpen();
   };
 

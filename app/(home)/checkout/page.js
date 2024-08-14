@@ -15,11 +15,9 @@ import ListOfCoupon from "@/components/modals/coupon/ListOfCoupon";
 
 import CheckOutFormModel from "@/components/layout/home/checkout/CheckOutFormModel";
 import CheckoutProductCard from "@/components/layout/home/checkout/CheckoutProductCard";
-import { clearCart } from "@/redux/slice/cartSlice";
 
 const CheckoutPage = () => {
   const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
   const [shippingData, setShippingData] = useState({
     name: "",
     phoneNumber: "",
@@ -32,14 +30,16 @@ const CheckoutPage = () => {
   const [openListOfCoupon, setOpenListOfCoupon] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [couponAmount, setCouponAmount] = useState(0);
-
-  useEffect(() => {
-    setTotalAmount(parseFloat(cart?.totalPrice));
-  }, [cart?.totalPrice]);
   const router = useRouter();
   const { data: session, status } = useSession();
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [disablePaymentButton, setDisableButton] = useState(false);
+
+  useEffect(() => {
+    const amount = Number(cart.totalPrice + 120).toFixed(2)
+    setTotalAmount(Number(amount));
+  }, [cart.totalPrice]);
+
   const handleSubmitOrder = async () => {
     try {
       if (cart.items.length <= 0) {
@@ -92,7 +92,7 @@ const CheckoutPage = () => {
         cartItems,
         shippingInfo: shippingData,
         user: session.user._id,
-        totalAmount: cart.totalPrice + 120,
+        totalAmount: totalAmount,
         paymentMethod: "PhonePe",
         isPaid: false,
       };
@@ -118,7 +118,7 @@ const CheckoutPage = () => {
               },
               body: JSON.stringify({
                 orderId: order._id,
-                amount: order.totalAmount + 120,
+                amount: totalAmount,
                 userId: session.user._id,
                 userPhoneNumber: session.user.phoneNumber,
               }),
@@ -175,9 +175,10 @@ const CheckoutPage = () => {
           </Typography>
 
           <div className="max-h-96 overflow-y-auto space-y-4">
-            {cart.items?.map((product, index) => (
-              <CheckoutProductCard key={product._id} data={product} />
-            ))}
+            {cart.items.length > 0 &&
+              cart.items?.map((product, index) => (
+                <CheckoutProductCard key={product._id} data={product} />
+              ))}
           </div>
 
           <div
@@ -189,6 +190,7 @@ const CheckoutPage = () => {
 
           <ListOfCoupon
             open={openListOfCoupon}
+            totalAmount={totalAmount}
             setOpen={setOpenListOfCoupon}
             setTotalAmount={setTotalAmount}
             setCouponAmount={setCouponAmount}
@@ -197,7 +199,7 @@ const CheckoutPage = () => {
           <div className="pt-4">
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
-              <span>₹{totalAmount + couponAmount}</span>
+              <span>₹{cart.totalPrice}</span>
             </div>
 
             <div className="flex justify-between mb-2">
@@ -206,8 +208,8 @@ const CheckoutPage = () => {
             </div>
             {couponAmount > 0 && (
               <div className="flex justify-between mb-2">
-                <span>Applied Coupon Discount</span>
-                <span>- ₹{couponAmount}</span>
+                <span>Discounted Amount</span>
+                <span className="text-teal-500">- ₹{couponAmount}</span>
               </div>
             )}
 
@@ -215,7 +217,7 @@ const CheckoutPage = () => {
 
             <div className="flex justify-between font-bold text-lg">
               <span>Total</span>
-              <span>₹{totalAmount + 120}</span>
+              <span>₹{totalAmount}</span>
             </div>
           </div>
         </div>
@@ -268,9 +270,7 @@ const CheckoutPage = () => {
             disabled={disablePaymentButton}
             loading={paymentLoading}
           >
-            {paymentLoading
-              ? "Proceeding to payment"
-              : `Pay ₹${totalAmount + 120}`}
+            {paymentLoading ? "Proceeding to payment" : `Pay ₹${totalAmount}`}
           </Button>
         </div>
       </div>
