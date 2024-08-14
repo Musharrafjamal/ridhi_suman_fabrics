@@ -21,7 +21,6 @@ const PaginationBtn = React.memo(({ totalPages = 1 }) => {
 
   useEffect(() => {
     const currentPage = parseInt(params.get("page") || "1", 12);
-
     setActive(currentPage);
   }, [params]);
 
@@ -29,7 +28,6 @@ const PaginationBtn = React.memo(({ totalPages = 1 }) => {
     (newPage) => {
       params.set("page", newPage);
       replace(`${pathname}?${params.toString()}`);
-
       setActive(newPage);
     },
     [replace, params, pathname]
@@ -38,9 +36,7 @@ const PaginationBtn = React.memo(({ totalPages = 1 }) => {
   const getItemProps = useCallback(
     (index) => ({
       variant: active === index ? "filled" : "text",
-
       color: "gray",
-
       onClick: () => updatePage(index),
     }),
     [active, updatePage]
@@ -48,26 +44,35 @@ const PaginationBtn = React.memo(({ totalPages = 1 }) => {
 
   const next = useCallback(() => {
     const newPage = Math.min(active + 1, totalPages);
-
     updatePage(newPage);
   }, [active, totalPages, updatePage]);
 
   const prev = useCallback(() => {
     const newPage = Math.max(active - 1, 1);
-
     updatePage(newPage);
   }, [active, updatePage]);
 
   const renderPageButtons = useMemo(() => {
     const maxPagesToShow = 5;
-    const pagesToRender = Math.min(totalPages, maxPagesToShow);
+    const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
+    let startPage = Math.max(active - halfMaxPagesToShow, 1);
+    let endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
 
-    return Array.from({ length: pagesToRender }, (_, i) => (
-      <IconButton key={i + 1} {...getItemProps(i + 1)}>
-        {i + 1}
+    if (endPage - startPage < maxPagesToShow - 1) {
+      startPage = Math.max(endPage - maxPagesToShow + 1, 1);
+    }
+
+    const pagesToRender = Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    );
+
+    return pagesToRender.map((page) => (
+      <IconButton key={page} {...getItemProps(page)}>
+        {page}
       </IconButton>
     ));
-  }, [totalPages, getItemProps]);
+  }, [active, totalPages, getItemProps]);
 
   return (
     <div className="flex items-center gap-4 justify-center">
