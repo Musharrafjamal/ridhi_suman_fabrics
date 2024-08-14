@@ -218,7 +218,9 @@ const AdminOrders = () => {
                       }
                     >
                       <Option value="confirmed">Confirmed</Option>
-                      <Option value="pending">Pending</Option>
+                      <Option value="pending" disabled>
+                        Pending
+                      </Option>
                       <Option
                         value="delivered"
                         disabled={order.status === "canceled"}

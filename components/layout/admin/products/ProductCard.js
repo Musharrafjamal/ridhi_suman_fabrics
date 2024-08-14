@@ -15,7 +15,6 @@ export function ProductCard({
   setOpenDeleteDialog,
   setSelectedProduct,
 }) {
-  console.log(product);
   return (
     <div className="group relative h-[32rem] flex flex-col justify-between overflow-hidden">
       <Image
@@ -32,7 +31,8 @@ export function ProductCard({
 
       <div className="relative p-2 w-full flex gap-2 justify-end bg-gradient-to-b from-white/50 to-transparent">
         <div className="w-11 h-8 bg-yellow-500 rounded-md flex justify-center items-center gap-1 font-semibold">
-        <FaBoxes />{product.orders?.length}
+          <FaBoxes />
+          {product.orders?.length}
         </div>
         <Link
           href={`/admin/products/${product._id}`}
