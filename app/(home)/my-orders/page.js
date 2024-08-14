@@ -21,9 +21,15 @@ const MyOrders = () => {
       const fetchOrders = async () => {
         try {
           const response = await fetch(`/api/user/orders?page=${page}`, {
+            method: "GET",
             cache: "no-store",
+            headers: {
+              "Content-Type": "application/json",
+            },
           });
+
           const ordersData = await response.json();
+
           setOrders(ordersData.data);
           setMeta(ordersData.meta);
         } catch (err) {

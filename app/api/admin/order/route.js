@@ -9,11 +9,11 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request) {
   try {
-    const isAdmin = await checkAuthorization(request);
+    // const isAdmin = await checkAuthorization(request);
 
-    if (isAdmin === "Unauthorized" || !isAdmin) {
-      return NextResponse.json("Unauthorized Request", { status: 401 });
-    }
+    // if (isAdmin === "Unauthorized" || !isAdmin) {
+    //   return NextResponse.json("Unauthorized Request", { status: 401 });
+    // }
 
     const { searchParams } = new URL(request.url);
 
@@ -27,11 +27,13 @@ export async function GET(request) {
     const orders = await Order.find()
       .skip(skip)
       .limit(limit)
+      .select(
+        "-cartItems -shippingInfo -paymentMethod -canceledBy -cancellationReason -isPaid -shiprocketOrderId -shiprocketShipmentId -transactionId"
+      )
       .populate({
         path: "user",
         select: "name image phoneNumber",
       })
-      .select("user totalAmount status createdAt")
       .exec();
 
     const totalOrders = await Order.countDocuments();
