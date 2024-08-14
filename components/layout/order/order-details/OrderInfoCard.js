@@ -25,6 +25,8 @@ const OrderInfoCard = ({ data, setData }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  console.log(data.status);
+
   return (
     <div className="rounded-lg flex flex-col gap-4 border-2 border-gray-500 w-full p-4">
       <Heading
@@ -102,23 +104,22 @@ const OrderInfoCard = ({ data, setData }) => {
             Contact us for any enquiry, we are available to serve you 24/7
           </p>
           <div className="flex gap-4 flex-col md:flex-row">
-            {data.status === "confirmed" ||
-              (data.status === "delivered" && (
-                <Link
-                  target="_blank"
-                  href={`https://www.shiprocket.in/shipment-tracking/`}
+            {(data.status === "confirmed" || data.status === "delivered") && (
+              <Link
+                target="_blank"
+                href={`https://www.shiprocket.in/shipment-tracking/`}
+              >
+                <Button
+                  variant="gradient"
+                  color="pink"
+                  className="flex items-center gap-1 w-full justify-center md:w-fit h-full"
+                  size="sm"
                 >
-                  <Button
-                    variant="gradient"
-                    color="pink"
-                    className="flex items-center gap-1 w-full justify-center md:w-fit h-full"
-                    size="sm"
-                  >
-                    <PiPathFill size={18} />
-                    Track order
-                  </Button>
-                </Link>
-              ))}
+                  <PiPathFill size={18} />
+                  Track order
+                </Button>
+              </Link>
+            )}
 
             <TooltipFooter label="+91 8000400004">
               <Link href={"/contactUs"}>
