@@ -1,17 +1,16 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-
 export default function YoutubeVideo() {
   const videos = [
     {
       url: "https://www.youtube.com/embed/mAc0AIENA9k?si=-RJhFsRLUx9J7sY5",
     },
     {
-      url: "https://www.youtube.com/embed/_eJ6KAb56Gw",
+      url: "https://www.youtube.com/embed/1OUTwbeVnEE?si=9LqWCJllYFb1Qq4L",
     },
     {
-      url: "https://www.youtube.com/embed/V7zkC5aPvoY",
+      url: "https://www.youtube.com/embed/iv19PapxkgM?si=sOfVWzVHIfNfZuu-",
     },
   ];
 
@@ -36,10 +35,9 @@ export default function YoutubeVideo() {
               <iframe
                 src={video.url}
                 title="YouTube video player"
-                frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
                 className="w-full h-full"
               ></iframe>
             </div>

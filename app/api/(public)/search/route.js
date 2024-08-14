@@ -37,7 +37,7 @@ export async function GET(request) {
       products = await Product.find({
         $text: { $search: sanitizedQuery },
       })
-        .select("-orders -updatedAt -createdAt -sizes")
+        .select("-orders -updatedAt -createdAt")
         .skip(parseInt(skip))
         .limit(parseInt(limit));
 
@@ -49,7 +49,7 @@ export async function GET(request) {
         $text: { $search: sanitizedQuery },
         visibility: true,
       })
-        .select("-orders -updatedAt -createdAt -sizes -visibility")
+        .select("-orders -updatedAt -createdAt -visibility")
         .skip(parseInt(skip))
         .limit(parseInt(limit));
       totalProducts = await Product.countDocuments({

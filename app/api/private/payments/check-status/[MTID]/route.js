@@ -52,6 +52,8 @@ export async function GET(req, { params }) {
       order.isPaid = true;
       order.transactionId = MTID;
       order.status = "pending";
+      order.canceledBy = null;
+      order.cancellationReason = null;
       await order.save();
     }
     return NextResponse.json(response.data, { status: 200 });

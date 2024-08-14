@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/layout/admin/products/ProductCard";
 
 import PaginationBtn from "@/components/ui/PaginationBtn";
 import ProductListSkeleton from "@/components/ui/skeletons/product/ProductListSkeleton";
+import ProductItem from "@/components/layout/products/ProductItem";
 
 async function getSearchResults(searchParams) {
   try {
@@ -71,7 +72,7 @@ const page = async ({ searchParams }) => {
           {data.data?.map((result) => {
             return (
               <div key={result._id}>
-                <ProductCard product={result} />
+                <ProductItem key={result._id} product={result} />
               </div>
             );
           })}
