@@ -182,7 +182,7 @@ const AdminOrders = () => {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      &#8377;{order.totalAmount}
+                      &#8377;{parseFloat(order.totalAmount).toFixed(2)}
                     </Typography>
                   </td>
 

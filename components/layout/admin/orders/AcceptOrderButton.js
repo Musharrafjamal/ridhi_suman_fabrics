@@ -96,6 +96,7 @@ const AcceptOrderButton = ({ order, setOrders }) => {
       );
 
       const res = await createShiprocketOrder.json();
+      console.log(res);
 
       if (createShiprocketOrder.status) {
         const updateOrder = await fetch(`/api/private/order/${order._id}`, {
@@ -113,6 +114,7 @@ const AcceptOrderButton = ({ order, setOrders }) => {
         });
 
         const updateOrderData = await updateOrder.json();
+        console.log(updateOrderData);
 
         if (updateOrder.status) {
           setOrders((prevOrders) => {

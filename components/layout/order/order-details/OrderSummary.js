@@ -16,15 +16,16 @@ const OrderSummary = ({ data }) => {
           </p>
         </div>
         <div className="overflow-auto max-h-96 px-0">
-          {data.cartItems.length > 0 && data.cartItems.map((product, index) => (
-            <CartItemsList key={index} product={product} data={data} />
-          ))}
+          {data.cartItems.length > 0 &&
+            data.cartItems.map((product, index) => (
+              <CartItemsList key={index} product={product} data={data} />
+            ))}
         </div>
       </div>
       <div className="w-full text-gray-800 flex flex-col gap-3 mt-5 lg:mt-0">
         <div className="flex justify-between font-bold">
           <span>Subtotal</span>
-          <span>&#x20B9; {data.totalAmount - 120}</span>
+          <span>&#x20B9; {(Number(data.totalAmount) - 120).toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
           <span>Delivery Service</span>
@@ -33,7 +34,7 @@ const OrderSummary = ({ data }) => {
         <div className="h-[2px] bg-gray-300"></div>
         <div className="flex justify-between text-black font-bold mt-1">
           <span>Total</span>
-          <span>&#x20B9; {data.totalAmount} </span>
+          <span>&#x20B9; {Number(data.totalAmount).toFixed(2)} </span>
         </div>
       </div>
     </div>
