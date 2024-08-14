@@ -7,10 +7,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { RiPriceTag2Line } from "react-icons/ri";
 import { TiCancelOutline } from "react-icons/ti";
 import { IoPricetagOutline } from "react-icons/io5";
-import {
-  PiContactlessPaymentLight,
-  PiPathFill,
-} from "react-icons/pi";
+import { PiContactlessPaymentLight, PiPathFill } from "react-icons/pi";
 import CancelOrder from "./CancelOrder";
 import { MdInfoOutline } from "react-icons/md";
 import { useSession } from "next-auth/react";
@@ -42,7 +39,13 @@ const OrderInfoCard = ({ data, setData }) => {
         <DataCard
           icon={<IoPricetagOutline size={20} />}
           title="Order Id"
-          data={data?.shiprocketOrderId}
+          data={
+            data.shiprocketOrderId ? (
+              data?.shiprocketOrderId
+            ) : (
+              <span>Order not confirmed yet</span>
+            )
+          }
         />
         <DataCard
           icon={<CiCalendarDate size={20} />}

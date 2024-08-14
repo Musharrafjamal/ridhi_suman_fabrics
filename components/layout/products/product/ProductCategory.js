@@ -7,7 +7,7 @@ const ProductCategory = ({ category, discount, subCategory }) => {
       <Link href={`/category/${category}/${subCategory.name}`}>
         <h3
           style={{ background: subCategory.colour }}
-          className="font-medium text-black py-0.5 rounded-md px-4 text-sm capitalize truncate"
+          className="font-medium text-black py-0.5 max-w-44 rounded-md px-4 text-sm capitalize truncate"
         >
           {category} / {subCategory.name}
         </h3>

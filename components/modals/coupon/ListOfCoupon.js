@@ -10,7 +10,7 @@ import { TicketIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const ListOfCoupon = ({ open, setOpen, setTotalAmount }) => {
+const ListOfCoupon = ({ open, setOpen, setTotalAmount, setCouponAmount }) => {
   const handleOpen = () => setOpen(!open);
   const [couponList, setCouponList] = useState([]);
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const ListOfCoupon = ({ open, setOpen, setTotalAmount }) => {
     if (discountAmount > parseInt(coupon.maxAmt)) {
       discountAmount = parseInt(coupon.maxAmt);
     }
-
+    setCouponAmount(discountAmount);
     // Calculate the new total amount after applying the coupon
     let couponAppliedAmount = cart.totalPrice - discountAmount;
     setTotalAmount(couponAppliedAmount);
@@ -108,10 +108,8 @@ const ListOfCoupon = ({ open, setOpen, setTotalAmount }) => {
                   ) : (
                     <span>Min spent ₹{coupon.minAmt}</span>
                   )}
-                </p> |
-                <p className="text-sm text-teal-700">
-                  Up to ₹{coupon.maxAmt}
-                </p>
+                </p>{" "}
+                |<p className="text-sm text-teal-700">Up to ₹{coupon.maxAmt}</p>
               </div>
             </div>
             <Button

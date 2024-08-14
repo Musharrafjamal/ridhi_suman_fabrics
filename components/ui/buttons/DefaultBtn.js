@@ -1,6 +1,6 @@
 import React from "react";
 
-const DefaultBtn = ({ icon, title, clickHandler, type="button" }) => {
+const DefaultBtn = ({ icon, title, clickHandler, type = "button" }) => {
   return (
     <button
       key={title}

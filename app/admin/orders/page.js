@@ -104,7 +104,7 @@ const AdminOrders = () => {
       icon={<IoIosRefresh />}
       title={"Refresh"}
       clickHandler={() => {
-        getOrders();
+        getOrders(currentPage);
       }}
     />,
   ];

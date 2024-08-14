@@ -20,7 +20,7 @@ const PaginationBtn = React.memo(({ totalPages = 1 }) => {
   const [active, setActive] = useState(1);
 
   useEffect(() => {
-    const currentPage = parseInt(params.get("page") || "1", 10);
+    const currentPage = parseInt(params.get("page") || "1", 12);
 
     setActive(currentPage);
   }, [params]);

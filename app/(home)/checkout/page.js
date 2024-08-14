@@ -31,9 +31,10 @@ const CheckoutPage = () => {
   });
   const [openListOfCoupon, setOpenListOfCoupon] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [couponAmount, setCouponAmount] = useState(0);
 
   useEffect(() => {
-    setTotalAmount(cart?.totalPrice);
+    setTotalAmount(parseFloat(cart?.totalPrice));
   }, [cart?.totalPrice]);
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -188,18 +189,25 @@ const CheckoutPage = () => {
             open={openListOfCoupon}
             setOpen={setOpenListOfCoupon}
             setTotalAmount={setTotalAmount}
+            setCouponAmount={setCouponAmount}
           />
 
           <div className="pt-4">
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
-              <span>₹{totalAmount}</span>
+              <span>₹{totalAmount + couponAmount}</span>
             </div>
 
             <div className="flex justify-between mb-2">
               <span>Delivery Service</span>
-              <span>₹120</span>
+              <span> ₹120</span>
             </div>
+            {couponAmount > 0 && (
+              <div className="flex justify-between mb-2">
+                <span>Applied Coupon Discount</span>
+                <span>- ₹{couponAmount}</span>
+              </div>
+            )}
 
             <hr className="my-2 bg-gray-400 h-px" />
 
