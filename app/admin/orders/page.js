@@ -42,6 +42,7 @@ const AdminOrders = () => {
     try {
       const res = await fetch(`/api/private/order/${id}`, {
         method: "PUT",
+        cache: "no-store",
         headers: {
           "Content-Type": "application/json",
         },
@@ -76,7 +77,14 @@ const AdminOrders = () => {
   const getOrders = async (page) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/order?page=${page}size=15`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/order?page=${page}size=15`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-store",
+        }
       );
 
       const data = await res.json();
