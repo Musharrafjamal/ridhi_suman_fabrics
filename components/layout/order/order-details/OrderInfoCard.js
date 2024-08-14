@@ -7,10 +7,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { RiPriceTag2Line } from "react-icons/ri";
 import { TiCancelOutline } from "react-icons/ti";
 import { IoPricetagOutline } from "react-icons/io5";
-import {
-  PiContactlessPaymentLight,
-  PiPathFill,
-} from "react-icons/pi";
+import { PiContactlessPaymentLight, PiPathFill } from "react-icons/pi";
 import CancelOrder from "./CancelOrder";
 import { MdInfoOutline } from "react-icons/md";
 import { useSession } from "next-auth/react";
@@ -82,9 +79,11 @@ const OrderInfoCard = ({ data, setData }) => {
           </h2>
 
           <ul className="list-disc ml-4 space-y-2">
-            <li className="text-sm">
-              Payment transaction id: {data.transactionId && data.transactionId}
-            </li>
+            {data.transactionId && (
+              <li className="text-sm">
+                Payment transaction id: {data.transactionId}
+              </li>
+            )}
             <li className="text-sm">
               Refundable amount will be credited within 2-3 business days!
             </li>
