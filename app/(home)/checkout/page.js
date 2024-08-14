@@ -34,13 +34,12 @@ const CheckoutPage = () => {
   const { data: session, status } = useSession();
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [disablePaymentButton, setDisableButton] = useState(false);
+
   useEffect(() => {
-    setTotalAmount(Number((cart.totalPrice + 120).toFixed(2)));
+    const amount = Number(cart.totalPrice + 120).toFixed(2)
+    setTotalAmount(Number(amount));
   }, [cart.totalPrice]);
-  useEffect(() => {
-    console.log(totalAmount);
-    console.log(typeof totalAmount);
-  }, [totalAmount]);
+
   const handleSubmitOrder = async () => {
     try {
       if (cart.items.length <= 0) {
@@ -176,9 +175,10 @@ const CheckoutPage = () => {
           </Typography>
 
           <div className="max-h-96 overflow-y-auto space-y-4">
-            {cart.items?.map((product, index) => (
-              <CheckoutProductCard key={product._id} data={product} />
-            ))}
+            {cart.items.length > 0 &&
+              cart.items?.map((product, index) => (
+                <CheckoutProductCard key={product._id} data={product} />
+              ))}
           </div>
 
           <div
@@ -199,9 +199,7 @@ const CheckoutPage = () => {
           <div className="pt-4">
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
-              <span>
-                ₹{cart.totalPrice}
-              </span>
+              <span>₹{cart.totalPrice}</span>
             </div>
 
             <div className="flex justify-between mb-2">
@@ -272,9 +270,7 @@ const CheckoutPage = () => {
             disabled={disablePaymentButton}
             loading={paymentLoading}
           >
-            {paymentLoading
-              ? "Proceeding to payment"
-              : `Pay ₹${totalAmount}`}
+            {paymentLoading ? "Proceeding to payment" : `Pay ₹${totalAmount}`}
           </Button>
         </div>
       </div>
