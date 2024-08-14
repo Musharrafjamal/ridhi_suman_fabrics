@@ -106,7 +106,7 @@ const SignupForm = ({ isAnimated, setIsAnimated }) => {
           reject(`Error sending OTP.`);
         } else {
           setIsOtpSent(true);
-          setTimer(10);
+          setTimer(60);
 
           resolve(otpData);
         }
