@@ -16,9 +16,18 @@ const Page = () => {
   const getProducts = async () => {
     try {
       let res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/order/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/order/${id}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
+
       res = await res.json();
+
       setData(res);
     } catch (error) {
       toast.error("Failed to fetch Orders", error);
@@ -47,6 +56,7 @@ const Page = () => {
         }
         title={"Order Details"}
       />
+
       <div className="my-5 gap-8 flex flex-col lg:flex-row mx-auto">
         <OrderSummary data={data} />
         <div className="w-full lg:w-3/5 flex flex-col gap-5">

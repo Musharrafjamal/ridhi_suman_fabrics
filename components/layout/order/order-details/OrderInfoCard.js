@@ -85,9 +85,11 @@ const OrderInfoCard = ({ data, setData }) => {
           </h2>
 
           <ul className="list-disc ml-4 space-y-2">
-            <li className="text-sm">
-              Payment transaction id: {data.transactionId && data.transactionId}
-            </li>
+            {data.transactionId && (
+              <li className="text-sm">
+                Payment transaction id: {data.transactionId}
+              </li>
+            )}
             <li className="text-sm">
               Refundable amount will be credited within 2-3 business days!
             </li>

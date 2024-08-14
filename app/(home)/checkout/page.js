@@ -39,6 +39,7 @@ const CheckoutPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [paymentLoading, setPaymentLoading] = useState(false);
+  const [disablePaymentButton, setDisableButton] = useState(false);
   const handleSubmitOrder = async () => {
     try {
       if (cart.items.length <= 0) {
@@ -75,7 +76,7 @@ const CheckoutPage = () => {
         toast.error("An error occurred while processing amount!");
         return;
       }
-
+      setDisableButton(true);
       const cartItems = cart.items.map((item) => {
         const productObject = {
           productId: item._id,
@@ -130,6 +131,7 @@ const CheckoutPage = () => {
           }
 
           const data = await response.json();
+          console.log("Payment response: ", data);
           if (data.success) {
             const phonePeRedirectUrl =
               data.data.instrumentResponse.redirectInfo.url;
@@ -263,6 +265,7 @@ const CheckoutPage = () => {
             size="lg"
             onClick={handleSubmitOrder}
             color="teal"
+            disabled={disablePaymentButton}
             loading={paymentLoading}
           >
             {paymentLoading

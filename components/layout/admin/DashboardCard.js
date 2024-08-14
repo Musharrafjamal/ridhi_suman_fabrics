@@ -31,7 +31,7 @@ const DashboardCard = ({ data }) => {
       label: "Total sub categories",
       value: data.subCategoriesCount,
       color: "#fb923c",
-      image: "/admin/dashboard/subCategory.png",
+      image: "/admin/dashboard/subcategory.png",
     },
     {
       id: 3,

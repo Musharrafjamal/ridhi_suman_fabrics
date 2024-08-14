@@ -51,9 +51,18 @@ const Footer = async () => {
           </div>
           <div className="flex gap-1 mt-4 md:mt-0">
             Designed and maintain by
-            <Link href={"https://ghosting.in"} target="_blank" className="flex gap-1 items-center">
+            <Link
+              href={"https://ghosting.in"}
+              target="_blank"
+              className="flex gap-1 items-center"
+            >
               <div className="font-semibold text-amber-500">Ghosting Tech</div>
-              <Image src={"/Ghosting.png"} width={20} height={20} />
+              <Image
+                src={"/ghosting.png"}
+                width={20}
+                height={20}
+                alt="Ghosting Tech Logo"
+              />
             </Link>
           </div>
         </div>
