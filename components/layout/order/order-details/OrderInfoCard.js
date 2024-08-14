@@ -25,8 +25,6 @@ const OrderInfoCard = ({ data, setData }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  console.log(data.status);
-
   return (
     <div className="rounded-lg flex flex-col gap-4 border-2 border-gray-500 w-full p-4">
       <Heading
