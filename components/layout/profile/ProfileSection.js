@@ -24,7 +24,7 @@ const ProfileCard = () => {
         floated={false}
         className="relative h-36 w-36 sm:w-48 mx-auto sm:mx-0 "
       >
-        <Image
+        <img
           src={session?.user?.image.url}
           alt="Profile Picture"
           fill
