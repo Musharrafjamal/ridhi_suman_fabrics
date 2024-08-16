@@ -86,8 +86,6 @@ export async function POST(request) {
       role: "admin",
     });
 
-    console.log(subAdmin);
-
     return NextResponse.json(subAdmin, { status: 200 });
   } catch (err) {
     return NextResponse.json(err.message, { status: 500 });

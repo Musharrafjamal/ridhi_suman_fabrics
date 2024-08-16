@@ -26,7 +26,6 @@ const getShiprocketToken = async () => {
 
     const shiprocketToken = await res.json();
 
-    console.log(shiprocketToken);
     shiprocketToken.status = res.status;
 
     return shiprocketToken;
@@ -54,7 +53,7 @@ const ShiprocketProvider = ({ children }) => {
       if (
         !savedToken ||
         currentDate - new Date(savedToken.date) > nineDaysInMilliseconds ||
-        savedToken.status === 500
+        savedToken.status_code !== 200
       ) {
         localStorage.removeItem("shiprocketToken");
 

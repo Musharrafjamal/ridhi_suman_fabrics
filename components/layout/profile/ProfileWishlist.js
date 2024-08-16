@@ -54,7 +54,6 @@ const ProfileWishlist = () => {
     const getWishlistData = async () => {
       const products = await fetchWishlist();
       setWishlistData(products);
-      console.log(products);
     };
 
     getWishlistData();

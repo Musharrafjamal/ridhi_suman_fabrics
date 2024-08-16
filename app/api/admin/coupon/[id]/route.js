@@ -4,7 +4,6 @@ import Coupon from "@/model/coupon";
 
 export async function DELETE(request, { params }) {
   try {
-    // console.log({ Params: params });
     const { id } = params;
 
     if (!id) {

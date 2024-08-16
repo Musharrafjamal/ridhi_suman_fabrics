@@ -152,8 +152,6 @@ export async function DELETE(request, { params }) {
 
     await dbConnect();
 
-    console.log(productId);
-
     const product = await Product.findById(productId);
     if (!product) {
       return NextResponse.json("Product not found", { status: 404 });
@@ -177,8 +175,6 @@ export async function DELETE(request, { params }) {
         },
       }
     );
-
-    console.log(users);
 
     return NextResponse.json("Product deleted successfully", { status: 200 });
   } catch (error) {

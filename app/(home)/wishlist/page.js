@@ -60,7 +60,6 @@ const WishlistPage = () => {
   useEffect(() => {
     const fetchWishlist = async () => {
       const data = await getWishlist(page, size);
-      console.log("data: ", data);
       setWishlistData(data);
     };
 

@@ -42,7 +42,6 @@ const SigninForm = ({ isAnimated, setIsAnimated }) => {
             password,
           });
 
-          console.log(response);
           if (response.ok) {
             resolve(response);
           } else {

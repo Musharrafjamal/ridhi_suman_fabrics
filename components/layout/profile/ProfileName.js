@@ -20,12 +20,9 @@ const ProfileName = ({ session }) => {
     setIsEditing(true);
   };
 
-  console.log(username);
-
   const handleSaveClick = async () => {
     setIsEditing(false);
     const updatedName = username.trim();
-    console.log(updatedName);
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user`, {

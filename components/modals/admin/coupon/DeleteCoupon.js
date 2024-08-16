@@ -9,11 +9,11 @@ import { toast } from "sonner";
 
 const DeleteCoupon = ({ open, setOpen, coupon, setCouponCode }) => {
   const [pending, setPending] = useState(false);
-  //   console.log(coupon);
   const handleOpen = () => setOpen(!open);
+
   const handleDelete = async () => {
-    // console.log({ Id: coupon._id });
     setPending(true);
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/coupon/${coupon._id}`,

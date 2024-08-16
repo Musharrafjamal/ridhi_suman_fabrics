@@ -47,8 +47,6 @@ export async function PUT(request) {
       return NextResponse.json("Invalid data", { status: 400 });
     }
 
-    console.log(data);
-
     if (
       data.password ||
       data.email ||

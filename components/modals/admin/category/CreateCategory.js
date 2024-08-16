@@ -19,7 +19,6 @@ import { toast } from "sonner";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/firebase";
 
-
 const CreateCategory = ({ open, setOpen, setCategories }) => {
   const handleOpen = () => setOpen(!open);
 
@@ -61,8 +60,8 @@ const CreateCategory = ({ open, setOpen, setCategories }) => {
         `categories/${formData.image.size + formData.image.name}`
       );
       await uploadBytes(imageRef, formData.image);
-      const imageUrl = await getDownloadURL(imageRef); // Get the image URL directly
-      console.log(imageUrl);
+      const imageUrl = await getDownloadURL(imageRef);
+
       const imageObject = { url: imageUrl, name: imageRef._location.path_ };
 
       const postData = { ...formData, image: imageObject };
@@ -95,7 +94,7 @@ const CreateCategory = ({ open, setOpen, setCategories }) => {
         toast.error(`Error creating category: ${errorData.message}`);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       toast.error(err.message || "An unexpected error occurred");
     } finally {
       setPending(false);
