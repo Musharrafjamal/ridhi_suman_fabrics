@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 
 import ImageSlider from "@/components/layout/products/productDetails/ImageSlider";
 import ProductInfo from "@/components/layout/products/productDetails/ProductInfo";
+import RecommendedProductsByCategory from "@/components/layout/products/product/RecommendedProductsByCategory";
+import RecommendedProductsBySubCategory from "@/components/layout/products/product/RecommendedProductsBySubCategory";
 
 const getProductById = async (productId) => {
   const headersList = headers();
@@ -28,7 +30,6 @@ const getProductById = async (productId) => {
     }
 
     const data = await res.json();
-
     return {
       success: true,
       message: "Product details fetched successfully",
@@ -45,17 +46,22 @@ const getProductById = async (productId) => {
 
 export default async function ProductData({ params: { productId } }) {
   const productData = await getProductById(productId);
-
+  console.log(productData.data.subCategory.name);
   if (!productData.success) {
     return <div>{productData.message}</div>;
   }
 
   return (
     <Suspense>
-      <div className="flex gap-6 flex-col md:flex-row justify-center">
+      <div className="flex gap-6 flex-col md:flex-row justify-center mb-16">
         <ImageSlider data={productData.data?.images} />
         <ProductInfo product={productData.data} />
       </div>
+      <RecommendedProductsBySubCategory
+        categoryName={productData.data.category}
+        subCategoryName={productData.data.subCategory.name}
+      />
+      <RecommendedProductsByCategory categoryName={productData.data.category} />
     </Suspense>
   );
 }

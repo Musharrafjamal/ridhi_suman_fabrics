@@ -131,7 +131,7 @@ const CheckoutPage = () => {
           }
 
           const data = await response.json();
-          console.log("Payment response: ", data);
+          // console.log("Payment response: ", data);
           if (data.success) {
             const phonePeRedirectUrl =
               data.data.instrumentResponse.redirectInfo.url;
@@ -144,7 +144,7 @@ const CheckoutPage = () => {
           toast.error("Error while submitting payment");
         }
       } else {
-        toast.error("An error occurred while placing order!");
+        toast.error(order);
       }
     } catch (err) {
       toast.error("Error while submitting order");
