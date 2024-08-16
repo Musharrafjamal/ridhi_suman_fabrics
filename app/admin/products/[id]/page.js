@@ -164,7 +164,6 @@ const Page = () => {
       }
     } catch (e) {
       toast.error("Failed to update product. Please try again later.");
-      console.log(e);
     }
   };
 
@@ -217,47 +216,6 @@ const Page = () => {
           />
         </div>
         <div className="w-full flex flex-col sm:flex-row items-center gap-4 h-full">
-          {/* <select
-            value={formData.category}
-            onChange={(e) => {
-              setFormData({ ...formData, category: e.target.value });
-              categories.map((category) => {
-                console.log(category.name, e.target.value);
-                if (category.name === e.target.value) {
-                  setSelectedSubcategories(category.subCategories);
-                }
-              });
-            }}
-          >
-            {categories.map((category) => (
-              <option key={category._id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          <select
-            value={`${formData.subCategory.name}-${formData.subCategory.colour}`}
-            onChange={(e) => {
-              const [name, colour] = e.target.value.split("-");
-              setFormData((prevState) => ({
-                ...prevState,
-                subCategory: {
-                  name,
-                  colour: colour.startsWith("#") ? colour : `#${colour}`,
-                },
-              }));
-            }}
-          >
-            {selectedSubcategories.map((subcategory) => (
-              <option
-                key={subcategory._id}
-                value={`${subcategory.name}-${subcategory.colour}`}
-              >
-                {subcategory.name}
-              </option>
-            ))}
-          </select> */}
-
           <Select
             label="Select Category"
             name="category"

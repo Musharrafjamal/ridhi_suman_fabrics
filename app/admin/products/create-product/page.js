@@ -120,7 +120,7 @@ const Page = () => {
 
   const handleSubCategoryChange = (value) => {
     const [name, colour] = value.split("~");
-    console.log(name, colour);
+
     setFormData((prevState) => ({
       ...prevState,
       subCategory: {

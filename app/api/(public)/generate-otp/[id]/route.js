@@ -73,9 +73,6 @@ export async function PUT(req, { params }) {
     const isOtpExpired = new Date() > new Date(user.otpExpires);
     const isOtpMatch = user.otp === parseInt(otp, 10);
 
-    console.log("isOtpExpired", isOtpExpired);
-    console.log("isOtpMatch", isOtpMatch);
-
     if (!isOtpMatch || isOtpExpired) {
       return NextResponse.json("Invalid or expired OTP", { status: 400 });
     }

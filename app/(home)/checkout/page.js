@@ -36,7 +36,7 @@ const CheckoutPage = () => {
   const [disablePaymentButton, setDisableButton] = useState(false);
 
   useEffect(() => {
-    const amount = Number(cart.totalPrice + 120).toFixed(2)
+    const amount = Number(cart.totalPrice + 120).toFixed(2);
     setTotalAmount(Number(amount));
   }, [cart.totalPrice]);
 
@@ -131,7 +131,6 @@ const CheckoutPage = () => {
           }
 
           const data = await response.json();
-          // console.log("Payment response: ", data);
           if (data.success) {
             const phonePeRedirectUrl =
               data.data.instrumentResponse.redirectInfo.url;

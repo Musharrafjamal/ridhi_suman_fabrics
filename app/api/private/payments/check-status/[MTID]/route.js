@@ -42,8 +42,6 @@ export async function GET(req, { params }) {
 
     const response = await axios.request(options);
 
-    // console.log(response.data);
-
     if (response.data.success) {
       const order = await Order.findById(orderId);
       if (!order) {

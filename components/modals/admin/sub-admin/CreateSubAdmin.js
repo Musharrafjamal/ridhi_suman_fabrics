@@ -119,7 +119,7 @@ const CreateSubAdmin = ({ open, setOpen, setAdmins }) => {
 
     promise.catch((err) => {
       console.log(err);
-      // toast.error(err.message);
+      toast.error("Something went wrong");
     });
   };
   return (

@@ -78,10 +78,8 @@ export async function POST(req) {
       data: { request: base64EncodedPayload },
     };
 
-    // Send request to PhonePe
     const response = await axios.request(options);
-    // console.log("response ", response);
-    // console.log("Response Data ", response.data);
+
     return NextResponse.json(response.data, { status: 200 });
   } catch (error) {
     console.error("Error during payment initiation:", error);
